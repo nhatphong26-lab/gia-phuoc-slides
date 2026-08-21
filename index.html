@@ -123,7 +123,7 @@
   </div>
 
   <!-- === PRESENTATION CONTROLS === -->
-  <audio id="bgMusic" src="assets/romantic-chill.mp3" loop preload="metadata"></audio>
+  <audio id="bgMusic" src="assets/romantic-melody-v2.mp3" loop preload="metadata"></audio>
   <nav class="deck-controls" aria-label="Điều khiển slide"><button id="prev" aria-label="Trang trước">←</button><span id="counter">1 / 10</span><button id="next" aria-label="Trang sau">→</button><button class="music-toggle" id="musicToggle" aria-label="Bật nhạc nền" aria-pressed="false"><span class="music-icon">♫</span><span class="music-label">Bật nhạc</span></button></nav>
   <div class="edit-hotzone" title="Bật chế độ sửa"></div><button class="edit-toggle" id="editToggle" title="Chế độ sửa (E)">✎</button><div class="edit-status">Đang sửa • Ctrl+S để lưu</div>
 
@@ -141,7 +141,7 @@
 
     /* === ORIGINAL CHILL BACKGROUND MUSIC — USER CONTROLLED === */
     const bgMusic=document.getElementById('bgMusic'),musicToggle=document.getElementById('musicToggle'),musicLabel=musicToggle.querySelector('.music-label');
-    bgMusic.volume=.16;
+    bgMusic.volume=.30;
     function updateMusicButton(playing){musicToggle.classList.toggle('playing',playing);musicToggle.setAttribute('aria-pressed',String(playing));musicToggle.setAttribute('aria-label',playing?'Tắt nhạc nền':'Bật nhạc nền');musicLabel.textContent=playing?'Tắt nhạc':'Bật nhạc'}
     musicToggle.addEventListener('click',async()=>{if(bgMusic.paused){try{await bgMusic.play();updateMusicButton(true)}catch{updateMusicButton(false)}}else{bgMusic.pause();updateMusicButton(false)}});
     bgMusic.addEventListener('pause',()=>updateMusicButton(false));bgMusic.addEventListener('play',()=>updateMusicButton(true));
