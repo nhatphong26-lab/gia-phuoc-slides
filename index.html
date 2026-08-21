@@ -76,6 +76,7 @@
     /* === NAVIGATION + INLINE EDITING === */
     .deck-controls{display:flex;gap:12px;align-items:center;background:rgba(3,23,17,.82);border:1px solid rgba(248,241,220,.2);backdrop-filter:blur(14px);padding:10px 14px;border-radius:999px;color:var(--cream)}
     .deck-controls button{border:0;background:transparent;color:var(--cream);font-size:18px;cursor:pointer;padding:5px 10px}.deck-controls span{font-size:15px;min-width:74px;text-align:center}
+    .deck-controls .music-toggle{display:flex;align-items:center;gap:8px;border-left:1px solid rgba(248,241,220,.2);margin-left:2px;padding-left:14px;color:var(--sun);white-space:nowrap}.music-toggle .music-label{min-width:auto;font-size:14px;font-weight:700}.music-toggle.playing .music-icon{animation:musicPulse 1.7s ease-in-out infinite}@keyframes musicPulse{50%{transform:scale(1.25);text-shadow:0 0 16px var(--sun)}}
     .edit-hotzone{position:fixed;top:0;left:0;width:80px;height:80px;z-index:10000;cursor:pointer}.edit-toggle{position:fixed;top:16px;left:16px;width:48px;height:48px;border:1px solid rgba(248,241,220,.3);border-radius:50%;background:#082a20;color:var(--cream);opacity:0;pointer-events:none;transition:opacity .3s;z-index:10001;cursor:pointer}.edit-toggle.show,.edit-toggle.active{opacity:1;pointer-events:auto}.editing [data-edit]{outline:1px dashed var(--sun);outline-offset:5px;cursor:text}.edit-status{position:fixed;top:20px;left:78px;background:#082a20;color:var(--sun);padding:10px 15px;border-radius:99px;font-size:13px;opacity:0;z-index:10002}.editing .edit-status{opacity:1}
   </style>
 </head>
@@ -122,7 +123,8 @@
   </div>
 
   <!-- === PRESENTATION CONTROLS === -->
-  <nav class="deck-controls" aria-label="Điều khiển slide"><button id="prev" aria-label="Trang trước">←</button><span id="counter">1 / 10</span><button id="next" aria-label="Trang sau">→</button></nav>
+  <audio id="bgMusic" src="assets/romantic-chill.mp3" loop preload="metadata"></audio>
+  <nav class="deck-controls" aria-label="Điều khiển slide"><button id="prev" aria-label="Trang trước">←</button><span id="counter">1 / 10</span><button id="next" aria-label="Trang sau">→</button><button class="music-toggle" id="musicToggle" aria-label="Bật nhạc nền" aria-pressed="false"><span class="music-icon">♫</span><span class="music-label">Bật nhạc</span></button></nav>
   <div class="edit-hotzone" title="Bật chế độ sửa"></div><button class="edit-toggle" id="editToggle" title="Chế độ sửa (E)">✎</button><div class="edit-status">Đang sửa • Ctrl+S để lưu</div>
 
   <script>
@@ -136,6 +138,13 @@
       showSlide(i){this.currentSlide=Math.max(0,Math.min(i,this.slides.length-1));this.slides.forEach((s,n)=>{s.classList.toggle('active',n===this.currentSlide);s.classList.toggle('visible',n===this.currentSlide)});document.getElementById('counter').textContent=`${this.currentSlide+1} / ${this.slides.length}`}
     }
     window.presentation=new SlidePresentation();
+
+    /* === ORIGINAL CHILL BACKGROUND MUSIC — USER CONTROLLED === */
+    const bgMusic=document.getElementById('bgMusic'),musicToggle=document.getElementById('musicToggle'),musicLabel=musicToggle.querySelector('.music-label');
+    bgMusic.volume=.16;
+    function updateMusicButton(playing){musicToggle.classList.toggle('playing',playing);musicToggle.setAttribute('aria-pressed',String(playing));musicToggle.setAttribute('aria-label',playing?'Tắt nhạc nền':'Bật nhạc nền');musicLabel.textContent=playing?'Tắt nhạc':'Bật nhạc'}
+    musicToggle.addEventListener('click',async()=>{if(bgMusic.paused){try{await bgMusic.play();updateMusicButton(true)}catch{updateMusicButton(false)}}else{bgMusic.pause();updateMusicButton(false)}});
+    bgMusic.addEventListener('pause',()=>updateMusicButton(false));bgMusic.addEventListener('play',()=>updateMusicButton(true));
 
     /* === INLINE TEXT EDITOR WITH LOCAL AUTO-SAVE === */
     class InlineEditor{
