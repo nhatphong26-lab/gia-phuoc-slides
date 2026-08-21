@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Khu sinh thái Gia Phước — Gò Công Tây</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
+  <style>
+    /* === THEME: CINEMATIC MEKONG GREEN === */
+    :root{--stage-bg:#031711;--slide-bg:#082a20;--green:#082a20;--green-2:#0d3b2d;--cream:#f8f1dc;--muted:#c6d2c8;--sun:#f3cb66;--coral:#f07d50;--line:rgba(248,241,220,.22);--ease:cubic-bezier(.16,1,.3,1)}
+    *{margin:0;padding:0;box-sizing:border-box}
+
+    /* ===========================================
+       FIXED 16:9 STAGE: MANDATORY BASE STYLES
+       Include this ENTIRE file in every presentation.
+       Slides are authored at 1920×1080 and scaled as a whole.
+       =========================================== */
+    html,body{width:100%;height:100%;margin:0;overflow:hidden;background:var(--stage-bg,#000)}
+    .deck-viewport{position:fixed;inset:0;overflow:hidden;background:var(--stage-bg,#000)}
+    .deck-stage{position:absolute;left:0;top:0;width:1920px;height:1080px;overflow:hidden;transform-origin:0 0;background:var(--slide-bg,#fff)}
+    .slide{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden;display:block;visibility:hidden;opacity:0;pointer-events:none;background:var(--slide-bg,#fff)}
+    .slide.active,.slide.visible{visibility:visible;opacity:1;pointer-events:auto;z-index:1}
+    img,video,canvas,svg{max-width:100%;max-height:100%}
+    .deck-controls{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:1000}
+    @media print{html,body{width:1920px;height:auto;overflow:visible;background:#fff}.deck-viewport{position:static;overflow:visible;background:#fff}.deck-stage{position:static;width:auto;height:auto;transform:none!important;background:none}.slide{position:relative;display:block!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;width:1920px;height:1080px;break-after:page;page-break-after:always}.slide:last-child{break-after:auto;page-break-after:auto}.deck-controls{display:none!important}}
+    @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.2s!important}}
+
+    /* === SHARED SLIDE ARCHITECTURE === */
+    body{font-family:"Be Vietnam Pro",sans-serif;color:var(--cream)}
+    .slide{background:radial-gradient(circle at 86% 12%,rgba(243,203,102,.12),transparent 24%),linear-gradient(145deg,#092e23,#061f18 72%)}
+    .slide::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:72px 72px;mask-image:linear-gradient(90deg,#0007,transparent 72%)}
+    .pad{position:absolute;inset:0;padding:86px 112px;z-index:2}
+    .kicker{font-size:23px;font-weight:700;letter-spacing:.19em;text-transform:uppercase;color:var(--sun)}
+    h1,h2,h3{letter-spacing:-.045em}h2{font-size:79px;line-height:1.06;max-width:1280px;margin-top:24px}h3{font-size:34px;line-height:1.2}
+    .serif{font-family:"Playfair Display",serif;font-style:italic;color:var(--sun)}
+    .lead{font-size:31px;line-height:1.55;color:var(--muted);max-width:1160px;margin-top:30px}
+    .source{position:absolute;left:112px;bottom:48px;font-size:18px;color:#d8dfd9aa;z-index:4}.source a{color:#f3cb66;text-decoration:none;border-bottom:1px solid #f3cb6680}
+    .page{position:absolute;right:86px;bottom:43px;font-size:20px;font-weight:700;color:#f3cb66;z-index:4}
+    .sun-orbit{position:absolute;width:250px;height:250px;border:2px solid var(--sun);border-radius:50%;right:100px;top:78px;box-shadow:0 0 100px rgba(243,203,102,.19)}
+    .reveal{opacity:0;transform:translateY(30px);transition:opacity .75s var(--ease),transform .75s var(--ease)}
+    .slide.visible .reveal{opacity:1;transform:none}.reveal:nth-child(2){transition-delay:.1s}.reveal:nth-child(3){transition-delay:.2s}.reveal:nth-child(4){transition-delay:.3s}
+    .photo{object-fit:cover}.photo-card{border:1px solid rgba(248,241,220,.2);box-shadow:0 24px 70px rgba(0,0,0,.32);overflow:hidden;background:#071d17}
+    .caption{font-size:18px;line-height:1.4;color:#d9e0daaa;margin-top:13px}
+    .pill{display:inline-flex;align-items:center;border:1px solid rgba(248,241,220,.34);border-radius:999px;padding:13px 21px;font-size:20px;font-weight:600;background:rgba(4,25,19,.5)}
+    .cards{display:grid;gap:24px}.card{border:1px solid var(--line);background:rgba(248,241,220,.055);padding:30px;border-radius:24px}.card p{font-size:24px;line-height:1.5;color:var(--muted);margin-top:13px}
+    .big-number{font-size:86px;font-weight:800;line-height:1;color:var(--sun)}
+
+    /* === SLIDE 01: FULL-BLEED COVER === */
+    .cover-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.48) saturate(1.12)}
+    .cover-shade{position:absolute;inset:0;background:linear-gradient(90deg,#041f18ed 0,#041f18a8 54%,#041f181c 100%),linear-gradient(0deg,#041f18c9,transparent 55%)}
+    .cover-copy{position:absolute;left:120px;top:115px;width:1150px;z-index:3}.cover-copy h1{font-size:118px;line-height:.98;margin-top:58px}.cover-copy p{font-size:34px;line-height:1.5;width:760px;color:#e6ece6;margin-top:31px}.cover-chips{position:absolute;left:120px;bottom:92px;display:flex;gap:16px;z-index:3}
+
+    /* === SLIDE 02: VERIFIED IDENTITY === */
+    .identity-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:78px;margin-top:55px}.identity-list{display:grid;gap:20px}.identity-row{display:grid;grid-template-columns:150px 1fr;gap:24px;padding:20px 0;border-bottom:1px solid var(--line)}.identity-row b{font-size:19px;letter-spacing:.09em;text-transform:uppercase;color:var(--sun)}.identity-row span{font-size:27px;line-height:1.4}.quote-panel{border-left:5px solid var(--sun);padding:30px 0 30px 38px;align-self:center}.quote-panel blockquote{font:700 italic 49px/1.28 "Playfair Display";color:var(--cream)}.quote-panel p{font-size:21px;color:var(--muted);margin-top:25px}
+
+    /* === SLIDE 03: VIDEO EVIDENCE === */
+    .evidence-grid{display:grid;grid-template-columns:820px 1fr;gap:70px;margin-top:48px}.evidence-grid .photo-card{height:625px}.evidence-grid img{width:100%;height:100%;object-fit:cover}.evidence-notes{display:flex;flex-direction:column;justify-content:center;gap:24px}.evidence-note{display:grid;grid-template-columns:78px 1fr;gap:22px;align-items:start}.evidence-note .icon{width:68px;height:68px;border:1px solid var(--sun);border-radius:50%;display:grid;place-items:center;font-size:29px;color:var(--sun)}.evidence-note h3{font-size:30px}.evidence-note p{font-size:23px;line-height:1.45;color:var(--muted);margin-top:7px}
+
+    /* === SLIDES 04-06: CINEMATIC IMAGE STORIES === */
+    .story-grid{display:grid;grid-template-columns:1.06fr .94fr;gap:68px;height:790px;align-items:center}.story-grid.reverse{grid-template-columns:.94fr 1.06fr}.story-photo{height:690px;border-radius:28px}.story-photo img{width:100%;height:100%;object-fit:cover}.story-copy h2{font-size:80px}.story-copy p{font-size:29px;line-height:1.55;color:var(--muted);margin:28px 0 30px}.facts{display:flex;gap:14px;flex-wrap:wrap}.note-box{margin-top:34px;border-left:3px solid var(--sun);padding:4px 0 4px 22px;font-size:20px;line-height:1.45;color:#dfe5dfb5}
+
+    /* === SLIDE 07: AUDIENCE === */
+    .audience-grid{grid-template-columns:repeat(3,1fr);margin-top:65px}.audience-grid .card{height:400px;display:flex;flex-direction:column;justify-content:space-between}.audience-grid .num{font-size:70px;color:var(--sun);font-weight:800}.audience-grid h3{font-size:36px}.audience-grid p{font-size:23px}.verified{display:inline-block;color:var(--sun);font-size:17px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+
+    /* === SLIDE 08: SUGGESTED ITINERARY === */
+    .timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:80px;position:relative}.timeline::before{content:"";position:absolute;left:8%;right:8%;top:55px;height:2px;background:linear-gradient(90deg,var(--sun),var(--coral))}.stop{position:relative;padding-top:105px}.dot{position:absolute;top:34px;left:25px;width:44px;height:44px;border:8px solid #0a3024;border-radius:50%;background:var(--sun);z-index:2;box-shadow:0 0 0 2px var(--sun)}.stop-card{height:300px;border:1px solid var(--line);border-radius:24px;background:rgba(255,255,255,.055);padding:28px}.time{font-size:19px;color:var(--sun);font-weight:700}.stop h3{font-size:29px;margin-top:13px}.stop p{font-size:21px;line-height:1.45;color:var(--muted);margin-top:12px}.proposal{position:absolute;right:112px;top:88px;border:1px solid var(--sun);color:var(--sun);padding:12px 18px;border-radius:99px;font-size:18px;font-weight:700}
+
+    /* === SLIDE 09: PRACTICAL INFORMATION === */
+    .practical{display:grid;grid-template-columns:1.05fr .95fr;gap:55px;margin-top:55px}.contact-panel{border:1px solid var(--line);border-radius:28px;padding:38px;background:linear-gradient(145deg,rgba(243,203,102,.1),rgba(255,255,255,.025))}.contact-item{padding:22px 0;border-bottom:1px solid var(--line)}.contact-item:last-child{border-bottom:0}.contact-item label{display:block;color:var(--sun);font-size:18px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}.contact-item div{font-size:28px;line-height:1.4;margin-top:7px}.checklist{grid-template-columns:1fr 1fr}.checklist .card{min-height:190px}.checklist h3{font-size:27px}.checklist p{font-size:20px}.warning{color:#f5d6a1!important}
+
+    /* === SLIDE 10: SOURCE DIRECTORY === */
+    .sources-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:55px}.source-card{border:1px solid var(--line);border-radius:23px;padding:28px 30px;background:rgba(255,255,255,.045)}.source-card .type{font-size:17px;color:var(--sun);font-weight:700;letter-spacing:.08em;text-transform:uppercase}.source-card h3{font-size:28px;margin-top:8px}.source-card p{font-size:20px;color:var(--muted);line-height:1.45;margin-top:9px}.source-card a{display:inline-block;color:var(--sun);font-size:18px;margin-top:14px;text-decoration:none;border-bottom:1px solid var(--sun)}.closing-line{position:absolute;left:112px;bottom:105px;font:700 italic 41px/1.2 "Playfair Display";color:var(--cream)}
+
+    /* === NAVIGATION + INLINE EDITING === */
+    .deck-controls{display:flex;gap:12px;align-items:center;background:rgba(3,23,17,.82);border:1px solid rgba(248,241,220,.2);backdrop-filter:blur(14px);padding:10px 14px;border-radius:999px;color:var(--cream)}
+    .deck-controls button{border:0;background:transparent;color:var(--cream);font-size:18px;cursor:pointer;padding:5px 10px}.deck-controls span{font-size:15px;min-width:74px;text-align:center}
+    .edit-hotzone{position:fixed;top:0;left:0;width:80px;height:80px;z-index:10000;cursor:pointer}.edit-toggle{position:fixed;top:16px;left:16px;width:48px;height:48px;border:1px solid rgba(248,241,220,.3);border-radius:50%;background:#082a20;color:var(--cream);opacity:0;pointer-events:none;transition:opacity .3s;z-index:10001;cursor:pointer}.edit-toggle.show,.edit-toggle.active{opacity:1;pointer-events:auto}.editing [data-edit]{outline:1px dashed var(--sun);outline-offset:5px;cursor:text}.edit-status{position:fixed;top:20px;left:78px;background:#082a20;color:var(--sun);padding:10px 15px;border-radius:99px;font-size:13px;opacity:0;z-index:10002}.editing .edit-status{opacity:1}
+  </style>
+</head>
+<body>
+  <div class="deck-viewport">
+    <main class="deck-stage" id="deckStage" aria-label="Bài trình bày Khu sinh thái Gia Phước">
+
+      <!-- === 01 / COVER === -->
+      <section class="slide active visible">
+        <img class="cover-photo" src="assets/gia-phuoc-cover.jpg" alt="Khách tham gia trò chơi cầu thăng bằng tại Khu sinh thái Gia Phước">
+        <div class="cover-shade"></div><div class="sun-orbit"></div>
+        <div class="cover-copy"><div class="kicker reveal">Một góc xanh ở Gò Công Tây</div><h1 class="reveal" data-edit>Khu sinh thái<br><span class="serif">Gia Phước</span></h1><p class="reveal" data-edit>Khám phá điểm đến qua hình ảnh thật, nguồn công khai và những gợi ý được ghi chú minh bạch.</p></div>
+        <div class="cover-chips"><span class="pill">Thiên nhiên</span><span class="pill">Trải nghiệm</span><span class="pill">Ẩm thực</span><span class="pill">Kết nối</span></div>
+        <div class="source">Ảnh thật từ <a href="https://www.facebook.com/watch/?v=656269346979116" target="_blank">video Facebook gốc</a></div><div class="page">01 / 10</div>
+      </section>
+
+      <!-- === 02 / VERIFIED IDENTITY === -->
+      <section class="slide"><div class="pad"><div class="kicker reveal">Hồ sơ điểm đến</div><h2 class="reveal" data-edit>Gia Phước là ai,<br>nằm ở đâu?</h2><div class="identity-grid"><div class="identity-list reveal"><div class="identity-row"><b>Tên trang</b><span>Du Lịch Sinh Thái GP</span></div><div class="identity-row"><b>Thông điệp</b><span>“Chạm nét quê – Mê Gò Công Tây”</span></div><div class="identity-row"><b>Địa chỉ</b><span>Ấp Thạnh Lạc Đông, xã Thạnh Nhựt, huyện Gò Công Tây, Tiền Giang</span></div><div class="identity-row"><b>Liên hệ</b><span>090 739 32 67</span></div></div><div class="quote-panel reveal"><blockquote data-edit>“Một điểm sinh thái địa phương đáng được biết đến nhiều hơn.”</blockquote><p>Nhận định từ caption video giới thiệu; không phải xếp hạng du lịch độc lập.</p></div></div></div><div class="source">Nguồn: <a href="https://www.facebook.com/p/Du-L%E1%BB%8Bch-Sinh-Th%C3%A1i-GP-61572214658834/" target="_blank">trang Facebook chính thức</a></div><div class="page">02 / 10</div></section>
+
+      <!-- === 03 / WHAT THE VIDEO SHOWS === -->
+      <section class="slide"><div class="pad"><div class="kicker reveal">Bằng chứng trực quan</div><h2 class="reveal" data-edit>79 giây cho thấy điều gì?</h2><div class="evidence-grid"><div><div class="photo-card reveal"><img src="assets/video-frame-03.png" alt="Nhóm khách tham gia thử thách cầu trên mặt nước"></div><div class="caption">Khung hình trích từ video công khai, không phải ảnh minh họa AI.</div></div><div class="evidence-notes"><div class="evidence-note reveal"><div class="icon">01</div><div><h3>Trò chơi trên nước</h3><p>Cầu hẹp, yếu tố thăng bằng và tính phối hợp nhóm xuất hiện rõ trong video.</p></div></div><div class="evidence-note reveal"><div class="icon">02</div><div><h3>Không khí tập thể</h3><p>Hình ảnh cho thấy nhóm bạn cùng tham gia, cổ vũ và chụp hình.</p></div></div><div class="evidence-note reveal"><div class="icon">03</div><div><h3>Ẩm thực dã ngoại</h3><p>Món cá nướng nguyên con được giới thiệu trong một cảnh riêng.</p></div></div></div></div></div><div class="source">Nguồn hình và thời lượng: <a href="https://www.facebook.com/watch/?v=656269346979116" target="_blank">video Facebook, 28/02/2025</a></div><div class="page">03 / 10</div></section>
+
+      <!-- === 04 / WATER CHALLENGE === -->
+      <section class="slide"><div class="pad"><div class="story-grid"><div class="story-photo photo-card reveal"><img src="assets/video-frame-02.png" alt="Nhóm khách đứng trên phao lớn trong khu trò chơi nước"></div><div class="story-copy"><div class="kicker reveal">Trải nghiệm 01</div><h2 class="reveal" data-edit>Cùng nhau<br><span class="serif">giữ thăng bằng</span></h2><p class="reveal" data-edit>Giá trị nổi bật không chỉ là trò chơi, mà là khoảnh khắc cả nhóm phải phối hợp, cười và tạo kỷ niệm chung.</p><div class="facts reveal"><span class="pill">Team building</span><span class="pill">Vui nhóm</span><span class="pill">Check-in</span></div><div class="note-box reveal">An toàn phụ thuộc quy định tại chỗ. Hãy xác nhận độ tuổi, áo phao và hướng dẫn trước khi tham gia.</div></div></div></div><div class="source">Ảnh thật trích từ <a href="https://www.facebook.com/watch/?v=656269346979116" target="_blank">video giới thiệu</a></div><div class="page">04 / 10</div></section>
+
+      <!-- === 05 / BRIDGE CHALLENGE === -->
+      <section class="slide"><div class="pad"><div class="story-grid reverse"><div class="story-copy"><div class="kicker reveal">Trải nghiệm 02</div><h2 class="reveal" data-edit>Một nhịp cầu,<br><span class="serif">nhiều tiếng cười</span></h2><p class="reveal" data-edit>Cầu hẹp trên mặt nước tạo ra một thử thách rất trực quan: dễ hiểu, dễ cổ vũ và dễ ghi lại bằng video.</p><div class="cards" style="grid-template-columns:1fr 1fr"><div class="card reveal"><div class="big-number">1</div><h3>Người thử sức</h3><p>Tập trung và giữ nhịp.</p></div><div class="card reveal"><div class="big-number">∞</div><h3>Người cổ vũ</h3><p>Tạo năng lượng cho cả nhóm.</p></div></div></div><div class="story-photo photo-card reveal"><img src="assets/gia-phuoc-cover.jpg" alt="Toàn cảnh cầu thăng bằng màu sắc tại Khu sinh thái Gia Phước"></div></div></div><div class="source">Ảnh bìa thật của <a href="https://www.facebook.com/watch/?v=656269346979116" target="_blank">video Facebook gốc</a></div><div class="page">05 / 10</div></section>
+
+      <!-- === 06 / FOOD === -->
+      <section class="slide"><div class="pad"><div class="story-grid"><div class="story-photo photo-card reveal"><img src="assets/video-frame-01.png" alt="Món cá nướng nguyên con và các loại nước chấm"></div><div class="story-copy"><div class="kicker reveal">Trải nghiệm 03</div><h2 class="reveal" data-edit>Khép ngày vui<br>bằng <span class="serif">vị miệt vườn</span></h2><p class="reveal" data-edit>Video giới thiệu món cá nướng nguyên con, rau ăn kèm và nhiều loại nước chấm — một hình ảnh đậm chất bữa ăn nhóm miền Tây.</p><div class="facts reveal"><span class="pill">Cá nướng</span><span class="pill">Rau ăn kèm</span><span class="pill">Dine-in</span></div><div class="note-box reveal">Món ăn, giá và tình trạng phục vụ có thể thay đổi. Nên liên hệ trang chính thức trước chuyến đi.</div></div></div></div><div class="source">Ảnh thật trích từ video; dịch vụ Dine-in được ghi trên <a href="https://www.facebook.com/p/Du-L%E1%BB%8Bch-Sinh-Th%C3%A1i-GP-61572214658834/" target="_blank">trang chính thức</a></div><div class="page">06 / 10</div></section>
+
+      <!-- === 07 / WHO IT FITS === -->
+      <section class="slide"><div class="pad"><div class="kicker reveal">Ai sẽ hợp?</div><h2 class="reveal" data-edit>Một không gian,<br>ba kiểu chuyến đi</h2><div class="cards audience-grid"><div class="card reveal"><div><div class="num">01</div><span class="verified">Trang chính thức đề cập</span></div><div><h3>Gia đình</h3><p>Bài đăng công khai mời cả gia đình vui chơi và nghỉ dưỡng trong không gian xanh.</p></div></div><div class="card reveal"><div><div class="num">02</div><span class="verified">Thể hiện trong video</span></div><div><h3>Nhóm bạn</h3><p>Các thử thách trên nước phù hợp với tinh thần cổ vũ và ghi lại kỷ niệm chung.</p></div></div><div class="card reveal"><div><div class="num">03</div><span class="verified">Gợi ý sử dụng</span></div><div><h3>Tập thể</h3><p>Có tiềm năng cho buổi gắn kết; cần liên hệ trước để xác nhận sức chứa và dịch vụ.</p></div></div></div></div><div class="source">Nguồn: <a href="https://www.facebook.com/p/Du-L%E1%BB%8Bch-Sinh-Th%C3%A1i-GP-61572214658834/" target="_blank">trang Du Lịch Sinh Thái GP</a> và video giới thiệu</div><div class="page">07 / 10</div></section>
+
+      <!-- === 08 / PROPOSED ITINERARY === -->
+      <section class="slide"><div class="pad"><div class="proposal">LỊCH TRÌNH GỢI Ý — KHÔNG PHẢI LỊCH CHÍNH THỨC</div><div class="kicker reveal">Nửa ngày thư thả</div><h2 class="reveal" data-edit>Gợi ý một nhịp đi<br>không quá vội</h2><div class="timeline"><div class="stop reveal"><div class="dot"></div><div class="stop-card"><div class="time">08:30</div><h3>Đến & làm quen</h3><p>Kiểm tra quy định, thay trang phục phù hợp và chụp ảnh nhóm.</p></div></div><div class="stop reveal"><div class="dot"></div><div class="stop-card"><div class="time">09:00</div><h3>Trò chơi nước</h3><p>Tham gia theo hướng dẫn tại chỗ; ưu tiên an toàn.</p></div></div><div class="stop reveal"><div class="dot"></div><div class="stop-card"><div class="time">10:30</div><h3>Nghỉ & check-in</h3><p>Dành thời gian cho ảnh tập thể và khoảnh khắc tự nhiên.</p></div></div><div class="stop reveal"><div class="dot"></div><div class="stop-card"><div class="time">11:30</div><h3>Ăn trưa</h3><p>Xác nhận thực đơn, giá và đặt bàn trước khi đến.</p></div></div></div></div><div class="source">Lịch trình do bài trình bày đề xuất dựa trên hình ảnh video; hãy xác nhận trực tiếp với điểm đến.</div><div class="page">08 / 10</div></section>
+
+      <!-- === 09 / PRACTICAL INFO === -->
+      <section class="slide"><div class="pad"><div class="kicker reveal">Trước khi khởi hành</div><h2 class="reveal" data-edit>Ba phút xác nhận,<br>một chuyến đi nhẹ nhàng hơn</h2><div class="practical"><div class="contact-panel reveal"><div class="contact-item"><label>Địa chỉ công khai</label><div>Ấp Thạnh Lạc Đông, xã Thạnh Nhựt, Gò Công Tây, Tiền Giang</div></div><div class="contact-item"><label>Số liên hệ trên trang</label><div>090 739 32 67</div></div><div class="contact-item"><label>Kênh xác nhận</label><div><a style="color:var(--sun)" href="https://www.facebook.com/p/Du-L%E1%BB%8Bch-Sinh-Th%C3%A1i-GP-61572214658834/" target="_blank">Facebook Du Lịch Sinh Thái GP</a></div></div></div><div class="cards checklist"><div class="card reveal"><h3>Giờ mở cửa</h3><p class="warning">Chưa đủ nguồn tin cậy để ghi cố định.</p></div><div class="card reveal"><h3>Giá vé / combo</h3><p class="warning">Cần hỏi trực tiếp theo ngày và số lượng khách.</p></div><div class="card reveal"><h3>Trang phục</h3><p>Quần áo gọn, dép bám tốt và một bộ thay nếu chơi nước.</p></div><div class="card reveal"><h3>An toàn</h3><p>Hỏi về áo phao, giới hạn độ tuổi và người hướng dẫn.</p></div></div></div></div><div class="source">Thông tin liên hệ: <a href="https://www.facebook.com/p/Du-L%E1%BB%8Bch-Sinh-Th%C3%A1i-GP-61572214658834/" target="_blank">trang chính thức</a> — nên xác nhận lại trước ngày đi</div><div class="page">09 / 10</div></section>
+
+      <!-- === 10 / SOURCES === -->
+      <section class="slide"><div class="pad"><div class="kicker reveal">Tài liệu & đường dẫn</div><h2 class="reveal" data-edit>Nguồn đã dùng<br>trong bài trình bày</h2><div class="sources-grid"><div class="source-card reveal"><div class="type">Nguồn chính</div><h3>Video giới thiệu Khu sinh thái Gia Phước</h3><p>Nguồn của toàn bộ khung hình thật và các nhận xét về hoạt động.</p><a href="https://www.facebook.com/watch/?v=656269346979116" target="_blank">Mở video Facebook ↗</a></div><div class="source-card reveal"><div class="type">Nguồn chính thức</div><h3>Trang Du Lịch Sinh Thái GP</h3><p>Địa chỉ, số liên hệ, thông điệp thương hiệu và dịch vụ công khai.</p><a href="https://www.facebook.com/p/Du-L%E1%BB%8Bch-Sinh-Th%C3%A1i-GP-61572214658834/" target="_blank">Mở trang Facebook ↗</a></div><div class="source-card reveal"><div class="type">Nguồn đối chiếu</div><h3>Bài đăng Instagram về Dịch vụ nấu ăn Gia Phước</h3><p>Kết quả tìm kiếm công khai có nhắc Khu du lịch sinh thái GP, Thạnh Nhựt, Gò Công Tây.</p><a href="https://www.instagram.com/p/C6H8r-igvU0/" target="_blank">Mở bài Instagram ↗</a></div><div class="source-card reveal"><div class="type">Bối cảnh khu vực</div><h3>Du lịch sinh thái Tiền Giang</h3><p>Tài liệu tham khảo về đặc trưng vườn trái cây, sông nước và du lịch sinh thái của tỉnh.</p><a href="https://www.traveloka.com/vi-vn/explore/destination/khu-du-lich-sinh-thai-o-tien-giang-acc/266943" target="_blank">Mở tài liệu tham khảo ↗</a></div></div><div class="closing-line" data-edit>Đi để chạm nét quê — về để nhớ Gò Công Tây.</div></div><div class="page">10 / 10</div></section>
+    </main>
+  </div>
+
+  <!-- === PRESENTATION CONTROLS === -->
+  <nav class="deck-controls" aria-label="Điều khiển slide"><button id="prev" aria-label="Trang trước">←</button><span id="counter">1 / 10</span><button id="next" aria-label="Trang sau">→</button></nav>
+  <div class="edit-hotzone" title="Bật chế độ sửa"></div><button class="edit-toggle" id="editToggle" title="Chế độ sửa (E)">✎</button><div class="edit-status">Đang sửa • Ctrl+S để lưu</div>
+
+  <script>
+    /* === FIXED-STAGE PRESENTATION CONTROLLER === */
+    class SlidePresentation{
+      constructor(){this.slides=[...document.querySelectorAll('.slide')];this.currentSlide=0;this.stage=document.getElementById('deckStage');this.lock=false;this.setupStageScale();this.setupNav();this.setupTouch();this.setupWheel();this.showSlide(0)}
+      setupStageScale(){const scale=()=>{const f=Math.min(innerWidth/1920,innerHeight/1080),x=(innerWidth-1920*f)/2,y=(innerHeight-1080*f)/2;this.stage.style.transform=`translate(${x}px,${y}px) scale(${f})`};scale();addEventListener('resize',scale)}
+      setupNav(){document.getElementById('prev').onclick=()=>this.showSlide(this.currentSlide-1);document.getElementById('next').onclick=()=>this.showSlide(this.currentSlide+1);addEventListener('keydown',e=>{if(e.target?.isContentEditable)return;if(['ArrowRight','ArrowDown',' ','PageDown'].includes(e.key)){e.preventDefault();this.showSlide(this.currentSlide+1)}if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){e.preventDefault();this.showSlide(this.currentSlide-1)}if(e.key==='Home')this.showSlide(0);if(e.key==='End')this.showSlide(this.slides.length-1)})}
+      setupTouch(){let sx=0,sy=0;addEventListener('touchstart',e=>{sx=e.changedTouches[0].screenX;sy=e.changedTouches[0].screenY},{passive:true});addEventListener('touchend',e=>{const dx=e.changedTouches[0].screenX-sx,dy=e.changedTouches[0].screenY-sy;if(Math.abs(dx)>70&&Math.abs(dx)>Math.abs(dy))this.showSlide(this.currentSlide+(dx<0?1:-1))},{passive:true})}
+      setupWheel(){addEventListener('wheel',e=>{if(this.lock||Math.abs(e.deltaY)<28)return;this.lock=true;this.showSlide(this.currentSlide+(e.deltaY>0?1:-1));setTimeout(()=>this.lock=false,650)},{passive:true})}
+      showSlide(i){this.currentSlide=Math.max(0,Math.min(i,this.slides.length-1));this.slides.forEach((s,n)=>{s.classList.toggle('active',n===this.currentSlide);s.classList.toggle('visible',n===this.currentSlide)});document.getElementById('counter').textContent=`${this.currentSlide+1} / ${this.slides.length}`}
+    }
+    window.presentation=new SlidePresentation();
+
+    /* === INLINE TEXT EDITOR WITH LOCAL AUTO-SAVE === */
+    class InlineEditor{
+      constructor(){this.isActive=false;this.items=[...document.querySelectorAll('[data-edit]')];this.restore();this.items.forEach((el,i)=>el.dataset.editId=i)}
+      toggleEditMode(){this.isActive=!this.isActive;document.body.classList.toggle('editing',this.isActive);document.getElementById('editToggle').classList.toggle('active',this.isActive);this.items.forEach(el=>el.contentEditable=this.isActive?'true':'false')}
+      save(){const data={};this.items.forEach(el=>data[el.dataset.editId]=el.innerHTML);localStorage.setItem('gia-phuoc-slide-edits',JSON.stringify(data))}
+      restore(){try{const data=JSON.parse(localStorage.getItem('gia-phuoc-slide-edits')||'{}');this.items.forEach((el,i)=>{if(data[i])el.innerHTML=data[i]})}catch{}}
+    }
+    const editor=new InlineEditor(),hotzone=document.querySelector('.edit-hotzone'),editToggle=document.getElementById('editToggle');let hideTimeout=null;
+    editToggle.addEventListener('click',()=>editor.toggleEditMode());hotzone.addEventListener('mouseenter',()=>{clearTimeout(hideTimeout);editToggle.classList.add('show')});hotzone.addEventListener('mouseleave',()=>{hideTimeout=setTimeout(()=>{if(!editor.isActive)editToggle.classList.remove('show')},400)});editToggle.addEventListener('mouseenter',()=>clearTimeout(hideTimeout));editToggle.addEventListener('mouseleave',()=>{hideTimeout=setTimeout(()=>{if(!editor.isActive)editToggle.classList.remove('show')},400)});hotzone.addEventListener('click',()=>editor.toggleEditMode());
+    addEventListener('keydown',e=>{if((e.key==='e'||e.key==='E')&&!e.target?.isContentEditable)editor.toggleEditMode();if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='s'){e.preventDefault();editor.save()}});
+  </script>
+</body>
+</html>
+
