@@ -141,10 +141,16 @@
 
     /* === ORIGINAL CHILL BACKGROUND MUSIC — USER CONTROLLED === */
     const bgMusic=document.getElementById('bgMusic'),musicToggle=document.getElementById('musicToggle'),musicLabel=musicToggle.querySelector('.music-label');
-    bgMusic.volume=.30;
+    bgMusic.volume=.22;
     function updateMusicButton(playing){musicToggle.classList.toggle('playing',playing);musicToggle.setAttribute('aria-pressed',String(playing));musicToggle.setAttribute('aria-label',playing?'Tắt nhạc nền':'Bật nhạc nền');musicLabel.textContent=playing?'Tắt nhạc':'Bật nhạc'}
-    musicToggle.addEventListener('click',async()=>{if(bgMusic.paused){try{await bgMusic.play();updateMusicButton(true)}catch{updateMusicButton(false)}}else{bgMusic.pause();updateMusicButton(false)}});
+    let userPausedMusic=false;
+    async function startBackgroundMusic(){if(userPausedMusic||!bgMusic.paused)return true;try{await bgMusic.play();updateMusicButton(true);return true}catch{updateMusicButton(false);return false}}
+    function removeStartFallback(){removeEventListener('pointerdown',startOnFirstInteraction,true);removeEventListener('keydown',startOnFirstInteraction,true);removeEventListener('touchstart',startOnFirstInteraction,true)}
+    async function startOnFirstInteraction(event){if(event.target?.closest?.('#musicToggle'))return;if(await startBackgroundMusic())removeStartFallback()}
+    musicToggle.addEventListener('click',async()=>{if(bgMusic.paused){userPausedMusic=false;await startBackgroundMusic();removeStartFallback()}else{userPausedMusic=true;bgMusic.pause();updateMusicButton(false)}});
     bgMusic.addEventListener('pause',()=>updateMusicButton(false));bgMusic.addEventListener('play',()=>updateMusicButton(true));
+    addEventListener('pointerdown',startOnFirstInteraction,true);addEventListener('touchstart',startOnFirstInteraction,{capture:true,passive:true});addEventListener('keydown',startOnFirstInteraction,true);
+    startBackgroundMusic();
 
     /* === INLINE TEXT EDITOR WITH LOCAL AUTO-SAVE === */
     class InlineEditor{
