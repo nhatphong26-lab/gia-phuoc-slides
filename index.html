@@ -47,10 +47,21 @@
     .cards{display:grid;gap:24px}.card{border:1px solid var(--line);background:rgba(248,241,220,.055);padding:30px;border-radius:24px}.card p{font-size:24px;line-height:1.5;color:var(--muted);margin-top:13px}
     .big-number{font-size:86px;font-weight:800;line-height:1;color:var(--sun)}
 
-    /* === SLIDE 01: FULL-BLEED COVER === */
-    .cover-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.48) saturate(1.12)}
-    .cover-shade{position:absolute;inset:0;background:linear-gradient(90deg,#041f18ed 0,#041f18a8 54%,#041f181c 100%),linear-gradient(0deg,#041f18c9,transparent 55%)}
-    .cover-copy{position:absolute;left:120px;top:115px;width:1150px;z-index:3}.cover-copy h1{font-size:118px;line-height:.98;margin-top:58px}.cover-copy p{font-size:34px;line-height:1.5;width:760px;color:#e6ece6;margin-top:31px}.cover-chips{position:absolute;left:120px;bottom:92px;display:flex;gap:16px;z-index:3}
+    /* === SLIDE 01: FEATURED POSTER CAROUSEL === */
+    .poster-carousel{position:absolute;inset:0;background:#061f18;overflow:hidden}
+    .poster-frame{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.018);transition:opacity 1s var(--ease),transform 7s ease;pointer-events:none}
+    .poster-frame.current{opacity:1;transform:scale(1);z-index:1}
+    .poster-vignette{position:absolute;inset:0;z-index:2;pointer-events:none;box-shadow:inset 0 0 110px rgba(1,18,13,.34)}
+    .poster-switcher{position:fixed;left:50%;bottom:86px;transform:translateX(-50%);z-index:1100;display:none;align-items:center;gap:16px;padding:10px 15px;border:1px solid rgba(255,255,255,.34);border-radius:999px;background:rgba(3,23,17,.86);backdrop-filter:blur(14px);box-shadow:0 16px 45px rgba(0,0,0,.28);color:var(--cream)}
+    .poster-active .poster-switcher{display:flex}
+    .poster-switcher button{width:52px;height:52px;border:1px solid rgba(248,241,220,.32);border-radius:50%;background:rgba(248,241,220,.08);color:var(--cream);font-size:27px;cursor:pointer;transition:background .25s,transform .25s}
+    .poster-switcher button:hover,.poster-switcher button:focus-visible{background:var(--sun);color:var(--green);transform:scale(1.06);outline:none}
+    .poster-dots{display:flex;gap:9px;padding:0 4px}.poster-dot{width:11px;height:11px!important;border:0!important;border-radius:50%;padding:0;background:rgba(248,241,220,.38)!important}.poster-dot.current{background:var(--sun)!important;box-shadow:0 0 0 4px rgba(243,203,102,.16)}
+    .poster-hint{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    .poster-note{position:absolute;right:34px;bottom:34px;z-index:4;padding:9px 14px;border-radius:999px;background:rgba(3,23,17,.72);color:rgba(248,241,220,.8);font-size:14px;letter-spacing:.03em}
+    @media (min-width:700px){.poster-switcher{left:60%}}
+    @media print{.poster-switcher{display:none!important}}
+    @media (prefers-reduced-motion:reduce){.poster-frame{transform:none!important}}
 
     /* === SLIDE 02: VERIFIED IDENTITY === */
     .identity-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:78px;margin-top:55px}.identity-list{display:grid;gap:20px}.identity-row{display:grid;grid-template-columns:150px 1fr;gap:24px;padding:20px 0;border-bottom:1px solid var(--line)}.identity-row b{font-size:19px;letter-spacing:.09em;text-transform:uppercase;color:var(--sun)}.identity-row span{font-size:27px;line-height:1.4}.quote-panel{border-left:5px solid var(--sun);padding:30px 0 30px 38px;align-self:center}.quote-panel blockquote{font:700 italic 49px/1.28 "Playfair Display";color:var(--cream)}.quote-panel p{font-size:21px;color:var(--muted);margin-top:25px}
@@ -83,17 +94,18 @@
     .edit-hotzone{position:fixed;top:0;left:0;width:80px;height:80px;z-index:10000;cursor:pointer}.edit-toggle{position:fixed;top:16px;left:16px;width:48px;height:48px;border:1px solid rgba(248,241,220,.3);border-radius:50%;background:#082a20;color:var(--cream);opacity:0;pointer-events:none;transition:opacity .3s;z-index:10001;cursor:pointer}.edit-toggle.show,.edit-toggle.active{opacity:1;pointer-events:auto}.editing [data-edit]{outline:1px dashed var(--sun);outline-offset:5px;cursor:text}.edit-status{position:fixed;top:20px;left:78px;background:#082a20;color:var(--sun);padding:10px 15px;border-radius:99px;font-size:13px;opacity:0;z-index:10002}.editing .edit-status{opacity:1}
   </style>
 </head>
-<body>
+<body class="poster-active">
   <div class="deck-viewport">
     <main class="deck-stage" id="deckStage" aria-label="Bài trình bày Khu sinh thái Gia Phước">
 
-      <!-- === 01 / COVER === -->
-      <section class="slide active visible">
-        <img class="cover-photo" src="assets/gia-phuoc-cover.jpg" alt="Khách tham gia trò chơi cầu thăng bằng tại Khu sinh thái Gia Phước">
-        <div class="cover-shade"></div><div class="sun-orbit"></div>
-        <div class="cover-copy"><div class="kicker reveal">Một góc xanh ở Gò Công Tây</div><h1 class="reveal" data-edit>Khu sinh thái<br><span class="serif">Gia Phước</span></h1><p class="reveal" data-edit>Khám phá điểm đến qua hình ảnh thật, nguồn công khai và những gợi ý được ghi chú minh bạch.</p></div>
-        <div class="cover-chips"><span class="pill">Thiên nhiên</span><span class="pill">Trải nghiệm</span><span class="pill">Ẩm thực</span><span class="pill">Kết nối</span></div>
-        <div class="source">Ảnh thật từ <a href="https://www.facebook.com/watch/?v=656269346979116" target="_blank">video Facebook gốc</a></div><div class="page">01 / 12</div>
+      <!-- === 01 / FEATURED HOLIDAY POSTERS === -->
+      <section class="slide active visible" id="posterSlide">
+        <div class="poster-carousel" id="posterCarousel" aria-label="Hai poster quảng cáo Gia Phước dịp lễ 2 tháng 9" aria-live="polite">
+          <img class="poster-frame current" src="assets/poster-gia-phuoc-2-9-v3.webp" alt="Poster Ốc đảo xanh Gia Phước với cô chủ quán mỉm cười và đưa tay mời">
+          <img class="poster-frame" src="assets/poster-gia-phuoc-2-9-v4.webp" alt="Poster Ốc đảo xanh Gia Phước với cô chủ quán nhìn về phía tiêu đề">
+          <div class="poster-vignette"></div>
+          <div class="poster-note">Poster quảng cáo • hình minh họa được thiết kế</div>
+        </div>
       </section>
 
       <!-- === 02 / VERIFIED IDENTITY === -->
@@ -133,6 +145,16 @@
 
   <!-- === PRESENTATION CONTROLS === -->
   <audio id="bgMusic" src="assets/romantic-melody-v2.mp3" loop preload="metadata"></audio>
+  <audio id="posterSfx" src="assets/poster-air-whoosh.mp3" preload="auto"></audio>
+  <div class="poster-switcher" aria-label="Điều khiển ảnh quảng cáo">
+    <button id="posterPrev" type="button" aria-label="Xem poster trước">‹</button>
+    <span class="poster-dots" aria-label="Vị trí poster">
+      <button class="poster-dot current" type="button" aria-label="Xem poster 1" data-poster="0"></button>
+      <button class="poster-dot" type="button" aria-label="Xem poster 2" data-poster="1"></button>
+    </span>
+    <span class="poster-hint" id="posterStatus">Ảnh 1 / 2 • Tự chuyển</span>
+    <button id="posterNext" type="button" aria-label="Xem poster tiếp theo">›</button>
+  </div>
   <nav class="deck-controls" aria-label="Điều khiển slide"><button id="prev" aria-label="Trang trước">←</button><span id="counter">1 / 12</span><button id="next" aria-label="Trang sau">→</button><button class="music-toggle" id="musicToggle" aria-label="Bật nhạc nền" aria-pressed="false"><span class="music-icon">♫</span><span class="music-label">Bật nhạc</span></button></nav>
   <div class="edit-hotzone" title="Bật chế độ sửa"></div><button class="edit-toggle" id="editToggle" title="Chế độ sửa (E)">✎</button><div class="edit-status">Đang sửa • Ctrl+S để lưu</div>
 
@@ -144,9 +166,19 @@
       setupNav(){document.getElementById('prev').onclick=()=>this.showSlide(this.currentSlide-1);document.getElementById('next').onclick=()=>this.showSlide(this.currentSlide+1);addEventListener('keydown',e=>{if(e.target?.isContentEditable)return;if(['ArrowRight','ArrowDown',' ','PageDown'].includes(e.key)){e.preventDefault();this.showSlide(this.currentSlide+1)}if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){e.preventDefault();this.showSlide(this.currentSlide-1)}if(e.key==='Home')this.showSlide(0);if(e.key==='End')this.showSlide(this.slides.length-1)})}
       setupTouch(){let sx=0,sy=0;addEventListener('touchstart',e=>{sx=e.changedTouches[0].screenX;sy=e.changedTouches[0].screenY},{passive:true});addEventListener('touchend',e=>{const dx=e.changedTouches[0].screenX-sx,dy=e.changedTouches[0].screenY-sy;if(Math.abs(dx)>70&&Math.abs(dx)>Math.abs(dy))this.showSlide(this.currentSlide+(dx<0?1:-1))},{passive:true})}
       setupWheel(){addEventListener('wheel',e=>{if(this.lock||Math.abs(e.deltaY)<28)return;this.lock=true;this.showSlide(this.currentSlide+(e.deltaY>0?1:-1));setTimeout(()=>this.lock=false,650)},{passive:true})}
-      showSlide(i){this.currentSlide=Math.max(0,Math.min(i,this.slides.length-1));this.slides.forEach((s,n)=>{s.classList.toggle('active',n===this.currentSlide);s.classList.toggle('visible',n===this.currentSlide)});document.getElementById('counter').textContent=`${this.currentSlide+1} / ${this.slides.length}`}
+      showSlide(i){this.currentSlide=Math.max(0,Math.min(i,this.slides.length-1));this.slides.forEach((s,n)=>{s.classList.toggle('active',n===this.currentSlide);s.classList.toggle('visible',n===this.currentSlide)});document.body.classList.toggle('poster-active',this.currentSlide===0);document.getElementById('counter').textContent=`${this.currentSlide+1} / ${this.slides.length}`;dispatchEvent(new CustomEvent('deck:slidechange',{detail:{index:this.currentSlide}}))}
     }
     window.presentation=new SlidePresentation();
+
+    /* === FEATURED POSTER AUTO-CAROUSEL + MANUAL CONTROLS === */
+    class PosterCarousel{
+      constructor(){this.frames=[...document.querySelectorAll('.poster-frame')];this.dots=[...document.querySelectorAll('.poster-dot')];this.status=document.getElementById('posterStatus');this.sfx=document.getElementById('posterSfx');this.index=0;this.timer=null;this.sfx.volume=.14;document.getElementById('posterPrev').onclick=()=>this.show(this.index-1,true);document.getElementById('posterNext').onclick=()=>this.show(this.index+1,true);this.dots.forEach(dot=>dot.onclick=()=>this.show(Number(dot.dataset.poster),true));const panel=document.getElementById('posterCarousel');panel.addEventListener('mouseenter',()=>this.stop());panel.addEventListener('mouseleave',()=>this.start());panel.addEventListener('focusin',()=>this.stop());panel.addEventListener('focusout',()=>this.start());addEventListener('deck:slidechange',e=>e.detail.index===0?this.start():this.stop());this.start()}
+      playSfx(){this.sfx.currentTime=0;this.sfx.play().catch(()=>{})}
+      show(next,manual=false){this.index=(next+this.frames.length)%this.frames.length;this.frames.forEach((frame,i)=>frame.classList.toggle('current',i===this.index));this.dots.forEach((dot,i)=>{dot.classList.toggle('current',i===this.index);dot.setAttribute('aria-current',i===this.index?'true':'false')});this.status.textContent=`Ảnh ${this.index+1} / ${this.frames.length} • ${manual?'Bạn vừa chọn':'Tự chuyển'}`;this.playSfx();if(manual){this.stop();this.start()}}
+      start(){if(window.presentation?.currentSlide!==0||this.timer)return;this.timer=setInterval(()=>this.show(this.index+1),6500)}
+      stop(){clearInterval(this.timer);this.timer=null}
+    }
+    window.posterCarousel=new PosterCarousel();
 
     /* === ORIGINAL CHILL BACKGROUND MUSIC — USER CONTROLLED === */
     const bgMusic=document.getElementById('bgMusic'),musicToggle=document.getElementById('musicToggle'),musicLabel=musicToggle.querySelector('.music-label');
